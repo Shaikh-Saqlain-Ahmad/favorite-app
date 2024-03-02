@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:favorite_app/model/favorite-item-model.dart';
 
 abstract class FavouriteEvents extends Equatable {
   const FavouriteEvents();
@@ -7,3 +8,8 @@ abstract class FavouriteEvents extends Equatable {
 }
 
 class FetchFavoriteList extends FavouriteEvents {}
+
+class FavouriteItem extends FavouriteEvents {
+  final FavouriteItemModel item;
+  const FavouriteItem({required this.item});
+}

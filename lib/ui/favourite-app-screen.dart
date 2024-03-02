@@ -1,6 +1,7 @@
 import 'package:favorite_app/bloc/favorite_app_bloc.dart';
 import 'package:favorite_app/bloc/favorite_app_event.dart';
 import 'package:favorite_app/bloc/favorite_app_state.dart';
+import 'package:favorite_app/model/favorite-item-model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,8 +22,11 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
-        title: const Text("Favourite List"),
+        backgroundColor: Colors.grey.shade900,
+        title:
+            const Text("Favourite List", style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
       body: BlocBuilder<FavouriteBloc, FavouriteItemState>(
@@ -40,7 +44,19 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   return Card(
                     child: ListTile(
                       title: Text(item.value.toString()),
-                      trailing: const Icon(Icons.favorite_border),
+                      trailing: IconButton(
+                          onPressed: () {
+                            FavouriteItemModel itemModel = FavouriteItemModel(
+                                id: item.id,
+                                value: item.value,
+                                isFavourite: item.isFavourite ? false : true);
+                            context
+                                .read<FavouriteBloc>()
+                                .add(FavouriteItem(item: itemModel));
+                          },
+                          icon: item.isFavourite
+                              ? const Icon(Icons.favorite)
+                              : const Icon(Icons.favorite_border_outlined)),
                     ),
                   );
                 },
