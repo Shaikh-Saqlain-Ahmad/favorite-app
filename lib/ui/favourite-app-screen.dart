@@ -1,6 +1,7 @@
 import 'package:favorite_app/bloc/favorite_app_bloc.dart';
 import 'package:favorite_app/bloc/favorite_app_event.dart';
 import 'package:favorite_app/bloc/favorite_app_state.dart';
+import 'package:favorite_app/constants/constants.dart';
 import 'package:favorite_app/model/favorite-item-model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,8 +26,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade900,
-        title:
-            const Text("Favourite List", style: TextStyle(color: Colors.white)),
+        title: Text("Favourite List",
+            style: TextStyle(color: Colors.white, fontFamily: font)),
         centerTitle: true,
       ),
       body: BlocBuilder<FavouriteBloc, FavouriteItemState>(
@@ -35,7 +36,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             case ListStatus.loading:
               return const Center(child: CircularProgressIndicator());
             case ListStatus.failure:
-              return const Center(child: Text("Something went wrong!"));
+              return const Center(
+                  child: Text(
+                "Something went wrong!",
+              ));
             case ListStatus.success:
               return ListView.builder(
                 itemCount: state.favouriteItemList.length,
@@ -43,7 +47,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   final item = state.favouriteItemList[index];
                   return Card(
                     child: ListTile(
-                      title: Text(item.value.toString()),
+                      title: Text(
+                        item.value.toString(),
+                        style: TextStyle(fontFamily: font),
+                      ),
                       trailing: IconButton(
                           onPressed: () {
                             FavouriteItemModel itemModel = FavouriteItemModel(
