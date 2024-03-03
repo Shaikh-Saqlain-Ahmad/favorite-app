@@ -1,4 +1,5 @@
 import 'package:favorite_app/bloc/favorite_app_bloc.dart';
+import 'package:favorite_app/constants/constants.dart';
 import 'package:favorite_app/repository/favourite-repository.dart';
 import 'package:favorite_app/ui/favourite-app-screen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
         ],
         child: MaterialApp(
             theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                colorScheme: ColorScheme.fromSeed(seedColor: primary),
                 useMaterial3: true),
             debugShowCheckedModeBanner: false,
             home: const FavouriteScreen()));

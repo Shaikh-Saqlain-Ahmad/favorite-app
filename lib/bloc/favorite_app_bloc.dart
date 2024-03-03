@@ -6,11 +6,15 @@ import 'package:favorite_app/repository/favourite-repository.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvents, FavouriteItemState> {
   List<FavouriteItemModel> favouriteList = [];
+  List<FavouriteItemModel> tempFavouriteList = [];
+
   FavoriteRepository favouriteRepository;
   FavouriteBloc({required this.favouriteRepository})
       : super(const FavouriteItemState()) {
     on<FetchFavoriteList>(fetchList);
     on<FavouriteItem>(_addFavouriteItem);
+    on<SelectItem>(_selectItem);
+    on<UnselectItem>(_unselectItem);
   }
   void fetchList(
       FetchFavoriteList event, Emitter<FavouriteItemState> emit) async {
@@ -26,5 +30,16 @@ class FavouriteBloc extends Bloc<FavouriteEvents, FavouriteItemState> {
         favouriteList.indexWhere((element) => element.id == event.item.id);
     favouriteList[index] = event.item;
     emit(state.copyWith(favouriteItemList: List.from(favouriteList)));
+  }
+
+  void _selectItem(SelectItem event, Emitter<FavouriteItemState> emit) async {
+    tempFavouriteList.add(event.item);
+    emit(state.copyWith(tempFavouriteItemList: List.from(tempFavouriteList)));
+  }
+
+  void _unselectItem(
+      UnselectItem event, Emitter<FavouriteItemState> emit) async {
+    tempFavouriteList.remove(event.item);
+    emit(state.copyWith(tempFavouriteItemList: List.from(tempFavouriteList)));
   }
 }
