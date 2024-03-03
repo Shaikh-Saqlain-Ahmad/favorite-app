@@ -5,6 +5,7 @@ import 'package:favorite_app/constants/constants.dart';
 import 'package:favorite_app/model/favorite-item-model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({super.key});
@@ -51,7 +52,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         builder: (context, state) {
           switch (state.listStatus) {
             case ListStatus.loading:
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child: SpinKitFadingFour(
+                color: Colors.white,
+              ));
             case ListStatus.failure:
               return const Center(
                   child: Text(
