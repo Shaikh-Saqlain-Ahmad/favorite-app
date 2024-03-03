@@ -1,3 +1,3 @@
-# favorite_app
+# Todo list made using bloc state management in flutter
 
-A new Flutter project.
+A simple application to add items as favorite, remove them using bloc state management to ensure better performance. 
