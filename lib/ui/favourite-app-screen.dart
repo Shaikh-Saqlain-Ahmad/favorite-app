@@ -25,6 +25,23 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
     return Scaffold(
       backgroundColor: primary,
       appBar: AppBar(
+        actions: [
+          BlocBuilder<FavouriteBloc, FavouriteItemState>(
+            builder: (context, state) {
+              return Visibility(
+                visible: state.tempFavouriteItemList.isNotEmpty ? true : false,
+                child: IconButton(
+                    onPressed: () {
+                      context.read<FavouriteBloc>().add(DeleteItem());
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: delete,
+                    )),
+              );
+            },
+          )
+        ],
         backgroundColor: primary,
         title: Text("Favourite List",
             style: TextStyle(color: Colors.white, fontFamily: font)),
